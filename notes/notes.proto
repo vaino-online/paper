@@ -1,0 +1,33 @@
+syntax = "proto3";
+package notes;
+
+// The package name for the generated code.
+option go_package = "github.com/vaino-online/paper;notes";
+
+// Services
+
+// The notes service definition.
+service Notes {
+    // Saving a single note.
+    rpc Save (Note) returns (NoteSaveReply);
+    // Retrieving a single note.
+    rpc Load (NoteSearch) returns (Note);
+}
+
+// Message attributes are always assigned an ID.
+
+// The request message containing the contents of a single note.
+message Note {
+    string title = 1;
+    bytes body = 2;
+}
+
+// The response message confirming if the note was saved.
+message NoteSaveReply {
+    bool saved = 1;
+}
+
+// The request message for searching notes with a given keyword.
+message NoteSearch {
+    string keyword = 1;
+}
